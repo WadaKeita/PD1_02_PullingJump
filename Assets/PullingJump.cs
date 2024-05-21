@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PullingJump : MonoBehaviour
@@ -10,10 +11,13 @@ public class PullingJump : MonoBehaviour
     private float jumpPower = 6;
 
     private bool isCanJump;
+    private bool isJump;
+
+    //private bool isCollisionExit;
 
     private void OnCollisionEnter(Collision collision)
     {
-       
+        isJump = false;
         Debug.Log("衝突した");
     }
 
@@ -42,6 +46,11 @@ public class PullingJump : MonoBehaviour
 
     private void OnCollisionExit(Collision collision)
     {
+
+        if (isJump == true)
+        {
+            isCanJump = false;
+        }
         Debug.Log("離脱した");
         //isCanJump = false;
     }
@@ -69,8 +78,13 @@ public class PullingJump : MonoBehaviour
             if (dist.sqrMagnitude == 0) { return; }
             // 差分を標準化し、jumpPowerをかけ合わせた値を移動量とする。
             rb.velocity = dist.normalized * jumpPower;
-
+            
             isCanJump = false;
+            isJump = true;
         }
+        //if(rb.velocity == Vector3.zero)
+        //{
+        //    isCanJump = true;
+        //}
     }
 }

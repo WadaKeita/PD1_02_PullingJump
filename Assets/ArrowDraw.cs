@@ -39,7 +39,7 @@ public class ArrowDraw : MonoBehaviour
             arrowImage.rectTransform.sizeDelta = new Vector2(size, size);
 
             arrowImage.gameObject.SetActive(true);
-            Debug.Log(dist);
+            //Debug.Log(dist);
         }
         else
         {
